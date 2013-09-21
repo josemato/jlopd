@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Cookies y LOPD</title>
+
+	<style>
+		#privacy-police { background: #333; color: #fff; border-radius: 10px; padding: 10px; font-size: 12px; display: none; }
+		#privacy-police a { color: #fff; }
+		.privacy-police-buttons { text-align: right }
+		.privacy-police-buttons button { background: #ff9; border: 0; padding: 4px 8px; margin: 3px; }
+	</style>
+</head>
+<body>
+<div id="privacy-police">
+	<h2>Uso de cookies</h2>
+	<p>Utilizamos cookies propias y de terceros para mejorar nuestros servicios y mostrarle publicidad relacionada con sus preferencias mediante el análisis de sus hábitos de navegación. Si continúa navegando, consideramos que acepta su uso. Puede obtener más información, o bien conocer cómo cambiar la configuración, en nuestra <a href="#">Política de cookies</a>.</p>
+</div>
+
+<p>Esta es la página de Inicio. Si se muestra un aviso es porque es la primera vez que entras aquí.</p>
+<p>El script en esta pantalla está configurado para cargar Google Analytics en 3 segundos.</p>
+<p><a href="otra-pagina-timer.html">Ir a otra página</a></p>
+
+<script src="assets/js/jlopd/jlopd.js"></script>
+<script>
+
+localStorage.clear(); // esta linea no se usa en produccion. SOLO PARA VERSION DEMO
+
+var settings = {
+	'container': 'privacy-police',
+	'callback': function(loadState) { 
+		if(loadState == true) {
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-39206545-1']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				console.log("load Analytics");
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		}
+	},
+	'load': 3 // seconds to load scripts
+};
+//localStorage.clear();
+JLOPD.init( settings );
+</script>
+</body>
+</html>

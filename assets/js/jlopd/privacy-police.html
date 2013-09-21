@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Cookies y LOPD</title>
+
+	<style>
+		#privacy-police { background: #333; color: #fff; border-radius: 10px; padding: 10px; font-size: 12px; display: none; }
+		#privacy-police a { color: #fff; }
+		.privacy-police-buttons { text-align: right }
+		.privacy-police-buttons button { background: #ff9; border: 0; padding: 4px 8px; margin: 3px; }
+	</style>
+</head>
+<body>
+<div id="privacy-police">
+	<h2>Uso de cookies</h2>
+	<p>Utilizamos cookies propias y de terceros para mejorar nuestros servicios y mostrarle publicidad relacionada con sus preferencias mediante el análisis de sus hábitos de navegación. Si continúa navegando, consideramos que acepta su uso. Puede obtener más información, o bien conocer cómo cambiar la configuración, en nuestra <a href="#">Política de cookies</a>.</p>
+</div>
+
+<script src="assets/js/lopd/lopd.js"></script>
+<script>
+var settings = {
+	'container': 'privacy-police',
+	'scripts': ['http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js', 'a.js'],
+	'callback': function(loadState) { 
+		if(loadState == true) {
+			// load analytics and other trackings/plugins
+			console.log("install !!");
+		} else {
+			// user dont allow to install third party cookies
+			console.log("no hay permisos!!");
+		}
+	},
+	'load': '3', // seconds to load scripts
+	//'requestPermission': true,
+	'button_ok': 'Ok',
+	'button_cancel': 'Cancelar'
+};
+//localStorage.clear();
+JLOPD.init( settings );
+</script>
+</body>
+</html>

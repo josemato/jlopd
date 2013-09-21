@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Cookies y LOPD</title>
+
+	<style>
+		#privacy-police { background: #333; color: #fff; border-radius: 10px; padding: 10px; font-size: 12px; display: none; }
+		#privacy-police a { color: #fff; }
+		.privacy-police-buttons { text-align: right }
+		.privacy-police-buttons button { background: #ff9; border: 0; padding: 4px 8px; margin: 3px; }
+	</style>
+</head>
+<body>
+<div id="privacy-police">
+	<h2>Uso de cookies</h2>
+	<p>Utilizamos cookies propias y de terceros para mejorar nuestros servicios y mostrarle publicidad relacionada con sus preferencias mediante el análisis de sus hábitos de navegación. Si continúa navegando, consideramos que acepta su uso. Puede obtener más información, o bien conocer cómo cambiar la configuración, en nuestra <a href="#">Política de cookies</a>.</p>
+</div>
+
+<p>Esta es <strong>OTRA PÁGINA</strong>. Si se muestra un aviso es porque es la primera vez que entras aquí.</p>
+<p>Si no se muestra un aviso es porque vienes a través de un enlace del blog o porque ya estuviste navegando por el blog.</p>
+<p>El script en esta pantalla está configurado para solicitar permiso al usuario en caso de ser la primera vez.</p>
+
+<script src="assets/js/jlopd/jlopd.js"></script>
+<script>
+var settings = {
+	'container': 'privacy-police',
+	'callback': function(loadState) { 
+		if(loadState == true) {
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-39206545-1']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				console.log("load Analytics");
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		}
+	},
+	'requestPermission': true
+};
+//localStorage.clear();
+JLOPD.init( settings );
+</script>
+</body>
+</html>
